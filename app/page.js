@@ -12,7 +12,7 @@ function HomePage(){
           Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
           quasi. In deleniti eaque aut repudiandae et a id nisi.
         </p>
-        <Link href="/Chat">
+        <Link href="/GeminiChat">
           <button className="btn btn-primary">Get Started</button>
         </Link>
         

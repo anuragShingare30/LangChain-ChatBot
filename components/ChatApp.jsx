@@ -65,7 +65,7 @@ function ChatApp() {
     return (
         <div className="min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]">
             <div>
-                <h1 className="text-3xl relative bottom-7">Google Gemini AI ChatBot</h1>
+                <h1 className="text-3xl relative bottom-5">Google Gemini AI ChatBot</h1>
                 {
                     messages.map((message, index) => {
 
@@ -85,7 +85,7 @@ function ChatApp() {
                     {isPending ? <span className="loading"></span> : null}
                 </div>
             </div>
-            <form className="join relative mb-9" onSubmit={handleSubmit}>
+            <form className="join relative mb-24" onSubmit={handleSubmit}>
                 <div className="join w-full absolute bottom-auto">
                     <input
                         type="text"
