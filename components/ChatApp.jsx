@@ -86,7 +86,7 @@ function ChatApp() {
                 </div>
             </div>
             <form className="join relative mb-24" onSubmit={handleSubmit}>
-                <div className="join w-full absolute bottom-auto">
+                <div className="join w-full absolute bottom-auto mt-5">
                     <input
                         type="text"
                         placeholder="Message VoyageVision"

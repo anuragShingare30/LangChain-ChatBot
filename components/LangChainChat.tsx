@@ -64,8 +64,8 @@ const LangChainChat: React.FC = () => {
 
       </div>
       <div>
-        <form className="join relative w-full" onSubmit={handleSubmit}>
-          <div className="join w-full absolute mt-4 mb-10 bottom-auto">
+        <form className="join relative mb-24 w-full" onSubmit={handleSubmit}>
+          <div className="join w-full absolute bottom-auto mt-10">
             <input
               type="text"
               placeholder="Message LangChain"
