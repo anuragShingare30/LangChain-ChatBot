@@ -39,6 +39,12 @@ const LangChainChat: React.FC = () => {
     setUserInput(e.target.value);
   };
 
+  if(isPending){
+    return (
+      <span className='loading loading-spinner text-2xl'></span>
+    )
+  }
+
   return (
     <div className='min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]'>
       <div>
