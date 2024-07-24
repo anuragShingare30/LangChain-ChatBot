@@ -15,7 +15,7 @@ async function LangchainChat() {
     
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
-            <div className="m-4">
+            <div className="m-8">
                <LangChainChat></LangChainChat>
             </div>
         </HydrationBoundary>

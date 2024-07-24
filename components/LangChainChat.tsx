@@ -39,26 +39,29 @@ const LangChainChat: React.FC = () => {
     setUserInput(e.target.value);
   };
 
-  if(isPending){
-    return (
-      <span className='loading loading-spinner text-2xl'></span>
-    )
-  }
+
 
   return (
     <div className='min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]'>
       <div>
-        <h1 className='text-3xl relative bottom-7'>Langchain Chat Bot</h1>
-        {messages.map((message, index) => {
-          let avatar = message.role === 'user' ? '👨🏽' : '🤖';
-          let bcg = message.role === 'user' ? "bg-base-200 shadow-lg" : "bg-base-100 shadow-lg";
-          return (
-            <div key={index} className={`flex flex-row gap-5 mt-6 leading-loose border-b border-base-300 ${bcg}`}>
-              <p className="text-xl m-3">{avatar}</p>
-              <p className={`text-xl m-3`}>{message.content}</p>
-            </div>
-          );
-        })}
+        <h1 className='text-3xl relative bottom-5'>Langchain Chat Bot</h1>
+        {
+          messages.map((message, index) => {
+            let avatar = message.role === 'user' ? '👨🏽' : '🤖';
+            let bcg = message.role === 'user' ? "bg-base-200 shadow-lg" : "bg-base-100 shadow-lg";
+            return (
+              <div key={index} className={`flex flex-row gap-5 mt-6 leading-loose border-b border-base-300 ${bcg}`}>
+                <p className="text-xl m-3">{avatar}</p>
+                <p className={`text-xl m-3`}>{message.content}</p>
+              </div>
+            );
+          })
+        }
+
+        <div className="m-10">
+          {isPending ? <span className="loading"></span> : null}
+        </div>
+
       </div>
       <div>
         <form className="join relative w-full" onSubmit={handleSubmit}>
