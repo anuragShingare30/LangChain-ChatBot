@@ -5,6 +5,7 @@ import {
     HydrationBoundary,
     QueryClient,
 } from '@tanstack/react-query';
+export const dynamic = 'force-dynamic';
 
 async function LangchainChat() {
     await new Promise((resolve) => { setTimeout(resolve, 1000) });
