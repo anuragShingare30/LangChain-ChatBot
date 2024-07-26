@@ -9,7 +9,7 @@ import { langchainChatResponse } from '../utils/actions';
 interface Message {
   role: 'user' | 'bot';
   content: string;
-}
+}; 
 
 const LangChainChat: React.FC = () => {
   const [userInput, setUserInput] = useState<string>('');
