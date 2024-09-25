@@ -8,12 +8,12 @@ import { GooglePaLMEmbeddings } from "@langchain/community/embeddings/googlepalm
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
-import { StringOutputParser } from "@langchain/core/output_parsers";
+import { StringOutputParser } from "@langchain/core/output_parsers"; 
 
+// import { HfInference } from "@huggingface/inference";
+// import { pipeline } from "@xenova/transformers";
 
-
-
-const PdfParser = async () => {
+async function PdfParser(){
 
     try {
         // LANGUAGE MODEL TO BE USED.
@@ -23,13 +23,15 @@ const PdfParser = async () => {
         });
 
 
-        // TO LOAD THE DATA FROM DATA SOURCE WE WILL USE 'DOCUMENTLOADERS'
+        // TO LOAD THE DATA FROM DATA SOURCE WE WILL USE 'DOCUMENTLOADERS' 
         const loader = new CheerioWebBaseLoader(
             "https://lilianweng.github.io/posts/2023-06-23-agent/",
-            
+
         );
         const docs = await loader.load();
+        // console.log(docs);
         
+
 
 
         // NOW, THE LOADED DOCUMENT FROM DATASOURCE WILL BE SPLITTED INTO SMALL CHUNKS, SO THAT IT WILL APPLICABLE TO CONTEXT WINDOW OF LLM.
@@ -39,10 +41,10 @@ const PdfParser = async () => {
             chunkOverlap: 200,
         });
         const allSplits = await textSplitter.splitDocuments(docs);
-        
 
 
-        // NOW WE WILL CONVERT SMALL CHUNKS INTO VECTOR USING 'EMBEDDINGS MODEL' AND STORE VECTOR IN 'VECTOR DB/VECTOR STORE'.
+
+        // NOW WE WILL CONVERT SMALL CHUNKS INTO VECTOR NUM USING 'EMBEDDINGS MODEL' AND STORE VECTOR IN 'VECTOR DB/VECTOR STORE'.
         const vectorStore = await MemoryVectorStore.fromDocuments(
             allSplits,
             new GooglePaLMEmbeddings(),
@@ -64,6 +66,7 @@ const PdfParser = async () => {
     Question: {question}
 
     Helpful Answer:`;
+
         const customRagPrompt = PromptTemplate.fromTemplate(template);
         const ragChain = await createStuffDocumentsChain({
             llm,
@@ -75,7 +78,7 @@ const PdfParser = async () => {
             question: "What are types of memory?",
             context,
         });
-        //   console.log(result);
+        // console.log(result);
 
 
 
@@ -83,6 +86,49 @@ const PdfParser = async () => {
         console.log(error);
 
     }
+
+
+    // USING HUGGING FACE
+    // try {
+    //     const inference = new HfInference(process.env.HUGGINGFACEHUB_API_TOKEN);
+
+
+    //     const result = inference.chatCompletion({
+    //         model: "mistralai/Mistral-Nemo-Instruct-2407",
+    //         messages: [{ role: "user", content: "What is the capital of France?" }],
+    //         max_tokens: 500,
+    //         max_length: 500,
+    //     });
+
+
+    //     // console.log((await result).choices[0].message.content); 
+    // }
+    // catch (error) {
+    //     console.log(error);
+    // }
+
+    // USING PIPELINE METHOD
+    // try {
+
+    //     // Create a text-generation pipeline
+    //     const generator = await pipeline('text-generation', 'Xenova/codegen-350M-nl');
+    //     // Generate text (default parameters)
+    //     const text = 'Once upon a time,';
+    //     const output = await generator(text, {
+    //         max_new_tokens: 20,
+    //         do_sample: true,
+    //         top_k: 5,
+
+    //     });
+    //     console.log(output);
+
+
+
+    // }
+    // catch (error) {
+    //     console.log(error);
+
+    // }
 
 
     return (

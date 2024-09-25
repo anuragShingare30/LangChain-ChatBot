@@ -9,13 +9,13 @@ import { AIMessage } from "@langchain/core/messages";
 
 
 
-// THIS IS THE FUNCTION REQUIRED TO ASK QUESTION TO AI AND GET RESPONSE.
+// THIS IS THE FUNCTION REQUIRED TO ASK QUESTION TO AI AND GET RESPONSE. 
 async function chatResponse(prompt: string) {
   // Access your API key as an environment variable
-  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+  const genAI = new GoogleGenerativeAI(process.env.API_KEY); 
   try {
     // Choose a model that's appropriate for your use case.
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); 
 
     const result = await model.generateContent({
       contents: [
@@ -76,7 +76,6 @@ async function langchainChatResponse(text: string) {
       new AIMessage({ content: "hi!" }),
     ];
 
-
     // THIS FUNCTION WILL ENCODE THE RESPONSE FROM AI AS WELL THE INPUT FROM USER. THIS FUNC REQUIRED THE SESSION ID.
     const withMessageHistory = new RunnableWithMessageHistory({
       runnable: chain,
@@ -117,7 +116,7 @@ async function langchainChatResponse(text: string) {
   };
 
 
-}
+};
 
 
 

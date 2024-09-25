@@ -9,7 +9,7 @@ const SideBar = () => {
         <div className='flex flex-row items-center gap-5 mb-16'>
           <AiFillMacCommand className='text-5xl' />
           <h1 className='text-xl'>Open Source Chat Bot</h1>
-        </div>
+        </div> 
       </Link>
 
 

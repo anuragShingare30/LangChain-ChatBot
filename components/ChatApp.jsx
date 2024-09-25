@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { chatResponse} from "../utils/actions";
 import toast from "react-hot-toast";
 
-// THIS IS THE LIVE CHAT APPLICATION FOR OUR APP.  
+// THIS IS THE LIVE CHAT APPLICATION FOR OUR APP.   
 
 // {
 //     candidates: [
@@ -42,7 +42,7 @@ function ChatApp() {
             }
             toast.success("Answered!!!");
             // Assuming result is the key holding the chat response
-             let result = data.content.parts[0].text;
+            let result = data.content.parts[0].text;
             setMessages((prevMessages) => [...prevMessages, { role: 'bot', parts:[{text : result}]}]);
         },
         onError: () => {

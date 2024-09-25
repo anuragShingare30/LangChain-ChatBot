@@ -10,7 +10,7 @@ interface Message {
   role: 'user' | 'bot';
   content: string;
 }; 
-
+ 
 const LangChainChat: React.FC = () => {
   const [userInput, setUserInput] = useState<string>('');
   const [messages, setMessages] = useState([]);
@@ -19,7 +19,7 @@ const LangChainChat: React.FC = () => {
     mutationFn: async (userInput: string) => await langchainChatResponse(userInput),
     onSuccess: (data) => {
       if (!data) {
-        toast.error("Something went wrong...");
+        toast.error("Something went wrong..."); 
         return;
       }
       toast.success("Success!!!");
@@ -28,7 +28,7 @@ const LangChainChat: React.FC = () => {
     }
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => { 
     e.preventDefault();
     setMessages((prevMessages) => [...prevMessages, { role: 'user', content: userInput }]);
     mutate(userInput);
