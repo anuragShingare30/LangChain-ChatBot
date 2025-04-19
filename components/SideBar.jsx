@@ -48,7 +48,7 @@ const SideBar = () => {
           <Link href='/Complaints'>
             <button className="btn btn-ghost w-full capitalize">Complaint/Request Submission Portal</button>
           </Link>
-          <Link href='/Interview'>
+          <Link href='/AI_Interview_App'>
             <button className="btn btn-ghost w-full capitalize">AI interview</button>
           </Link>
         </div>
