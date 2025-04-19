@@ -7,11 +7,13 @@ import { HumanMessage } from "@langchain/core/messages";
 import { AIMessage } from "@langchain/core/messages";
 import { GoogleGenAI } from "@google/genai";
 import { Collage_Rules } from "./Rules";
-import { createEvent } from "./types";
+import { createEvent,eventStatus,hallStatus } from "./types";
 import prisma from "./db";
 import { revalidatePath } from "next/cache";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { Truculenta } from "next/font/google";
+import { Createe } from "@prisma/client";
 
 /**
  @notice utils folder
@@ -95,15 +97,16 @@ async function CreateEventForm(values: createEvent) {
   try {
     await prisma.createe.create({
       data: {
-        hallname:values.hallname,
-        clubname:values.clubname,
-        eventname:values.eventname,
-        time:values.time,
-        date:values.date
+        hallname: values.hallname,
+        clubname: values.clubname,
+        eventname: values.eventname,
+        time: values.time,
+        date: values.date,
       }
     })
     console.log("Submitted Values:", values);
     revalidatePath('/');
+    return true;
   } 
   catch (error) {
     console.log(error);
@@ -112,4 +115,15 @@ async function CreateEventForm(values: createEvent) {
 }
 
 
-export { chatResponse, GetResumeATS_Score,CreateEventForm,GenerateInterviewQuestions,EvaluateInterviewScore};
+async function DisplayAllEvent():Promise<Createe[]>{
+  try {
+    const events = await prisma.createe.findMany();
+    return events;
+  } catch (error) {
+    console.error("Error Getting to create to Display Event", error);
+    return [];
+  }
+}
+
+
+export { chatResponse, GetResumeATS_Score,CreateEventForm,GenerateInterviewQuestions,EvaluateInterviewScore,DisplayAllEvent};

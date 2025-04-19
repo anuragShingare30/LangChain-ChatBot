@@ -5,8 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["prismaSchemaFolder"]  
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"]
 }
 
 datasource db {
@@ -18,10 +18,10 @@ datasource db {
 // Here we will create our DB model/Schema
 
 model Createe {
-  id      Int      @id @default(autoincrement())
-  hallname String
-  clubname String
-  eventname String
-  time String
-  date String
+  id          String      @id @default(cuid())
+  hallname    String
+  clubname    String
+  eventname   String
+  date        String
+  time        String
 }

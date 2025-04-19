@@ -12,25 +12,25 @@ import React from 'react'
     6. Club Name
  */
 
-const EventCard = (  /* { hallName,status,date,eventName,time,clubName } */   ) => {
+const EventCard = ({ hallName,clubName,eventName,date,time }) => {
     return (
         <div className="card bg-base-300 w-96 shadow-sm border">
-            <figure>
+            {/* <figure>
                 <img
                     src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                     alt="Shoes" 
                 />
-            </figure>
+            </figure> */}
             <div className="card-body">
                 <h1 className="card-title">
-                    Web Dev Club Orientation Session
+                    {eventName}
                     <div className="badge badge-success">Active</div>
                 </h1>
-                <p className='text-white'>Sudha Murthy Hall</p>
+                <p className='text-white'>{clubName}</p>
                 <div className="card-actions justify-end mt-2">
-                    <div className="badge badge-outline">19 Jan'25</div>
-                    <div className="badge badge-outline">4:30 to 5:30</div>
-                    <div className="badge badge-outline">P.M.</div>
+                    <div className="badge badge-outline">{date}</div>
+                    <div className="badge badge-outline">{time}</div>
+                    <div className="badge badge-outline">{hallName}</div>
                 </div>
             </div>
         </div>

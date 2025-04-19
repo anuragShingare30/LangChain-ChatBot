@@ -1,11 +1,13 @@
 'use client';
-import React from 'react';
 
+import React from 'react';
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { CreateEventForm } from '../utils/actions';
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { createEvent,eventStatus,hallStatus } from '../utils/types';
+
 
 /**
  * This are the required Params:
@@ -24,24 +26,41 @@ const CreateEvent = () => {
     let Router = useRouter();
 
     // Here {data} struct will be destructured -> Stored in DB
-    const {mutate,isPending} = useMutation({
-        mutationFn: async(data) => await CreateEventForm(data),
-        onSuccess:(data) => {
-            if(!data){
+    const { mutate, isPending } = useMutation({
+        mutationFn: async (data: createEvent) => await CreateEventForm(data),
+        onSuccess: (data) => {
+            if (!data || typeof data === 'string') {
                 toast.error("Something went wrong!!!");
                 return;
             }
-            toast.success("Event Created");
+            toast.success("Event Created Successfully 🎉");
             Router.push('/EventsListing');
-            return data;
+        },
+        onError: () => {
+            toast.error("Error while creating the event");
         }
     })
 
-    const onSubmit = (data) => {
-        console.log(data);
-        mutate(data);
-    }
+    const onSubmit = (data: {
+        HallName: string;
+        ClubName: string;
+        EventName: string;
+        Date: string;
+        TimeSlot: string;
+        EventStatus: number;
+        HallStatus: number;
+    }) => {
+        const formatted: createEvent = {
+            hallname: data.HallName,
+            clubname: data.ClubName,
+            eventname: data.EventName,
+            date: data.Date,
+            time: data.TimeSlot,
+        };
 
+        console.log("Formatted values being sent to mutation:", formatted);
+        mutate(formatted);
+    };
     return (
         <div>
 
@@ -112,11 +131,11 @@ const CreateEvent = () => {
 
 
                     <button
-                        type="submit" className='btn btn-sm btn-success' 
+                        type="submit" className='btn btn-sm btn-success'
                         disabled={isPending}
                     >
                         {isPending ? "Loading..." : "Create event"}
-                    </button> 
+                    </button>
                 </form>
 
             </div>
