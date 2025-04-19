@@ -17,11 +17,11 @@ datasource db {
 
 // Here we will create our DB model/Schema
 
-model CreateEvent {
+model Createe {
   id      Int      @id @default(autoincrement())
   hallname String
   clubname String
   eventname String
-  date Int
-  time Int
+  time String
+  date String
 }

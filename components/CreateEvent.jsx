@@ -3,27 +3,43 @@ import React from 'react';
 
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { CreateEventForm } from '../utils/actions';
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 /**
  * This are the required Params:
-    1. Hall Name
+    1. Hall Name//
     2. Status
     3. Date 
-    4. Event Name 
+    4. Event Name //
     5. Time Slot
-    6. Club Name 
+    6. Club Name //
  */
 
 
 const CreateEvent = () => {
 
-    const { register, handleSubmit, formState: { errors }} = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    let Router = useRouter();
 
     // Here {data} struct will be destructured -> Stored in DB
+    const {mutate,isPending} = useMutation({
+        mutationFn: async(data) => await CreateEventForm(data),
+        onSuccess:(data) => {
+            if(!data){
+                toast.error("Something went wrong!!!");
+                return;
+            }
+            toast.success("Event Created");
+            Router.push('/EventsListing');
+            return data;
+        }
+    })
+
     const onSubmit = (data) => {
         console.log(data);
-        
-        toast.success("form submitted");
+        mutate(data);
     }
 
     return (
@@ -36,52 +52,71 @@ const CreateEvent = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
 
                     {/* Hall Name */}
-                    <input 
-                        type="text" 
-                        placeholder="Enter Hall Name" 
-                        className="input bg-base-300 border-gray-600" 
-                        {...register("HallName", { required: true })} 
-                    />
+                    <select
+                        className="select select-bordered w-full bg-base-300 border-gray-600"
+                        {...register("HallName", { required: true })}
+                    >
+                        <option value="" disabled>
+                            Select Hall
+                        </option>
+                        <option value="Sudha Murthy Hall">Sudha Murthy Hall</option>
+                        <option value="Drawing Hall">Drawing Hall</option>
+                        <option value="Hall 101">Hall 101</option>
+                        <option value="Hall 102">Hall 102</option>
+                    </select>
                     {errors.HallName && <span>This field is required</span>}
 
+
                     {/* Club Name */}
-                    <input 
-                        type="text" 
-                        placeholder="Enter Club Name" 
-                        className="input bg-base-300 border-gray-600" 
-                        {...register("ClubName", { required: true })} 
-                    />
-                    {errors.ClubName && <span>This field is required</span>}
+                    <select
+                        className="select select-bordered w-full bg-base-300 border-gray-600"
+                        {...register("ClubName", { required: true })}
+                    >
+                        <option value="" disabled>
+                            Select Club Name
+                        </option>
+                        <option value="Web Dev CLub">Web Dev CLub</option>
+                        <option value="CP Club">CP Club</option>
+                        <option value="Robotics Club">Robotics Club1</option>
+                        <option value="LND Club">LND Club</option>
+                        <option value="ECell Club">ECell Club</option>
+                    </select>
+                    {errors.ClubName && <span className='text-red-400'>This field is required</span>}
 
                     {/* Event Name */}
-                    <input 
-                        type="text" 
-                        placeholder="Enter Event Name" 
-                        className="input bg-base-300 border-gray-600" 
-                        {...register("EventName", { required: true })} 
+                    <input
+                        type="text"
+                        placeholder="Enter Event Name"
+                        className="input bg-base-300 border-gray-600"
+                        {...register("EventName", { required: true })}
                     />
-                    {errors.EventName && <span>This field is required</span>}
+                    {errors.EventName && <span className='text-red-400'>This field is required</span>}
 
                     {/* Date */}
-                    <input 
-                        type="text" 
-                        placeholder="Enter Date of Event" 
-                        className="input bg-base-300 border-gray-600" 
-                        {...register("Date", { required: true })} 
+                    <input
+                        type="text"
+                        placeholder="Enter Date of Event"
+                        className="input bg-base-300 border-gray-600"
+                        {...register("Date", { required: true })}
                     />
-                    {errors.Date && <span>This field is required</span>}
+                    {errors.Date && <span className='text-red-400'>This field is required</span>}
 
                     {/* Time Slot */}
-                    <input 
-                        type="text" 
-                        placeholder="Enter Time Slot of Event" 
-                        className="input bg-base-300 border-gray-600" 
-                        {...register("TimeSlot", { required: true })} 
+                    <input
+                        type="text"
+                        placeholder="Enter Time Slot of Event"
+                        className="input bg-base-300 border-gray-600"
+                        {...register("TimeSlot", { required: true })}
                     />
-                    {errors.TimeSlot && <span>This field is required</span>}
+                    {errors.TimeSlot && <span className='text-red-400'>This field is required</span>}
 
 
-                    <input type="submit" className='btn btn-sm btn-success' />
+                    <button
+                        type="submit" className='btn btn-sm btn-success' 
+                        disabled={isPending}
+                    >
+                        {isPending ? "Loading..." : "Create event"}
+                    </button> 
                 </form>
 
             </div>
