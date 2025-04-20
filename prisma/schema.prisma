@@ -24,4 +24,6 @@ model Createe {
   eventname   String
   date        String
   time        String
+  eventstatus String @default("Active")
+  hallstatus String @default("Inqueue")
 }

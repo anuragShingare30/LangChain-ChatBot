@@ -47,8 +47,8 @@ const CreateEvent = () => {
         EventName: string;
         Date: string;
         TimeSlot: string;
-        EventStatus: number;
-        HallStatus: number;
+        EventStatus: string;
+        HallStatus:string
     }) => {
         const formatted: createEvent = {
             hallname: data.HallName,
@@ -56,6 +56,8 @@ const CreateEvent = () => {
             eventname: data.EventName,
             date: data.Date,
             time: data.TimeSlot,
+            eventstatus:data.EventStatus,
+            hallstatus:data.HallStatus
         };
 
         console.log("Formatted values being sent to mutation:", formatted);

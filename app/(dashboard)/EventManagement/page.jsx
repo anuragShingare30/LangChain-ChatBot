@@ -20,7 +20,7 @@ async function EventManagement() {
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
             <div className="m-10">
-                <h1 className="text-3xl text-white border rounded-lg p-2">Create Event for your Club!!!</h1>
+                <h1 className="text-3xl  border rounded-lg p-2">Create Event for your Club!!!</h1>
                 <CreateEvent></CreateEvent>
             </div>
         </HydrationBoundary>

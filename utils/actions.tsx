@@ -7,7 +7,7 @@ import { HumanMessage } from "@langchain/core/messages";
 import { AIMessage } from "@langchain/core/messages";
 import { GoogleGenAI } from "@google/genai";
 import { Collage_Rules } from "./Rules";
-import { createEvent,eventStatus,hallStatus } from "./types";
+import { createEvent,eventStatus } from "./types";
 import prisma from "./db";
 import { revalidatePath } from "next/cache";
 import { useRef, useState } from "react";
@@ -102,6 +102,8 @@ async function CreateEventForm(values: createEvent) {
         eventname: values.eventname,
         time: values.time,
         date: values.date,
+        eventstatus:values.eventstatus,
+        hallstatus:values.hallstatus
       }
     })
     console.log("Submitted Values:", values);
@@ -117,7 +119,16 @@ async function CreateEventForm(values: createEvent) {
 
 async function DisplayAllEvent():Promise<Createe[]>{
   try {
-    const events = await prisma.createe.findMany();
+    const events = await prisma.createe.findMany({
+      orderBy:{
+        id:"desc"
+      },
+      where:{
+        eventstatus:"Active"
+      },
+      // Here we will always consider 4 events
+      take:4
+    });
     return events;
   } catch (error) {
     console.error("Error Getting to create to Display Event", error);

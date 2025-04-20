@@ -1,17 +1,23 @@
 import React from 'react'
 import { AiFillMacCommand } from "react-icons/ai";
+import ThemeToggle from './ThemeToggle';
 import Link from "next/link";
 
 const SideBar = () => {
   return (
     <div>
 
+      <div className='flex flex-row items-center gap-10 mb-16'>
       <Link href='/'>
-        <div className='flex flex-row items-center gap-5 mb-16'>
+        <div className='flex flex-row items-center gap-5'>
           <AiFillMacCommand className='text-5xl' />
           <h1 className='text-xl'>College OS</h1>
         </div>
       </Link>
+      <ThemeToggle></ThemeToggle>
+      </div>
+
+      
 
       {/* Here we will render all our Pages according to general and student */}
       <div className='flex flex-col items-center gap-20'>

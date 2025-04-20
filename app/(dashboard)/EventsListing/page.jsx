@@ -24,7 +24,7 @@ async function EventsListing() {
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
             <div className="m-5">
-                <h1 className="text-3xl text-white border rounded-lg p-2">Check Out All Events</h1>
+                <h1 className="text-3xl  border rounded-lg p-2">Check Out All Events</h1>
                 <div className="mt-10">
                     <Listing />
                 </div>

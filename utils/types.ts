@@ -1,14 +1,14 @@
 
 export enum eventStatus{
-    Active,
-    Upcoming,
-    Ended,
+    Active = "Active",
+    Upcoming = "Upcoming",
+    Ended = "Ended",
 }
 
 export enum hallStatus{
-    Available,
-    Booked,
-    NotAvailable
+    Available = "Available",
+    Booked = "Booked",
+    NotAvailable = "NotAvailable"
 }
 
 export interface createEvent {
@@ -17,6 +17,6 @@ export interface createEvent {
     eventname: string;
     date: string;
     time: string;
-    eventstatus?: eventStatus;
-    hallstatus?: hallStatus;
+    eventstatus?: string;
+    hallstatus:string;
 }
