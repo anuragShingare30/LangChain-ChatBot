@@ -3,7 +3,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { langchainChatResponse } from '../utils/actions';
+import { chatResponse } from '../utils/actions';
 
 
 interface Message {
@@ -16,7 +16,7 @@ const LangChainChat: React.FC = () => {
   const [messages, setMessages] = useState([]);
 
   const { mutate, isPending, data } = useMutation({
-    mutationFn: async (userInput: string) => await langchainChatResponse(userInput),
+    mutationFn: async (userInput: string) => await chatResponse(userInput),
     onSuccess: (data) => {
       if (!data) {
         toast.error("Something went wrong..."); 
