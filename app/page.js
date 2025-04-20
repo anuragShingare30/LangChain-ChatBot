@@ -9,15 +9,13 @@ import React from "react";
 function HomePage(){
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero  min-h-screen bg-[url(https://img.collegepravesh.com/2021/11/IIIT-Trichy.jpg)] opacity-50">
     <div className="hero-content text-center">
       <div className="max-w-md">
-        <h1 className="text-6xl font-bold">GenAI real-time ChatBOt</h1>
-        <p className="py-6 text-xl">
-          We have provided you an option to select your preffered language Model for the ChatBot. So please select the model of chatbot and continue with your QnA session with an GenAI powered ChatBot.
-        </p>
+        <h1 className="text-6xl font-bold text-black opacity-100 mb-80">IIIT Trichy College OS</h1>
+       
         <Link href="/EventsListing">
-          <button className="btn btn-primary">Get Started</button>
+          <button className="btn btn-secondary mt-10">Get Started</button>
         </Link>
         
       </div>

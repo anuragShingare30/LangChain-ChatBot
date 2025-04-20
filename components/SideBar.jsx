@@ -11,7 +11,7 @@ const SideBar = () => {
       <Link href='/'>
         <div className='flex flex-row items-center gap-5'>
           <AiFillMacCommand className='text-5xl' />
-          <h1 className='text-xl'>College OS</h1>
+          <h1 className='text-xl'>IIITT OS</h1>
         </div>
       </Link>
       <ThemeToggle></ThemeToggle>
